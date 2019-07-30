@@ -6,5 +6,6 @@ setuptools.setup(
     version='1.0.0',
     packages=['inkscapeshapecli'],
     entry_points=dict(
-        console_scripts=[]),
-    install_requires=[])
+        console_scripts=[
+            'inkscape2dxf = inkscapeshapecli.inkscape2dxf:script_main']),
+    install_requires=['lxml'])
