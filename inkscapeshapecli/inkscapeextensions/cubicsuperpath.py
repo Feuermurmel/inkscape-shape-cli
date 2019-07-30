@@ -1,4 +1,3 @@
-#!/usr/bin/env python
 """
 cubicsuperpath.py
 
@@ -19,8 +18,10 @@ along with this program; if not, write to the Free Software
 Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 
 """
-from . import simplepath 
 from math import *
+
+from . import simplepath
+
 
 def matprod(mlist):
     prod=mlist[0]
@@ -96,7 +97,7 @@ def ArcToPath(p1,params):
         applymat(mat, pts[1])
         applymat(mat, pts[2])
     return(p)
-    
+
 def CubicSuperPath(simplepath):
     csp = []
     subpath = -1
@@ -104,7 +105,7 @@ def CubicSuperPath(simplepath):
     last = []
     lastctrl = []
     for s in simplepath:
-        cmd, params = s        
+        cmd, params = s
         if cmd == 'M':
             if last:
                 csp[subpath].append([lastctrl[:],last[:],last[:]])
@@ -148,22 +149,8 @@ def CubicSuperPath(simplepath):
             lastctrl = subpathstart[:]
     #append final superpoint
     csp[subpath].append([lastctrl[:],last[:],last[:]])
-    return csp    
+    return csp
 
-def unCubicSuperPath(csp):
-    a = []
-    for subpath in csp:
-        if subpath:
-            a.append(['M',subpath[0][1][:]])
-            for i in range(1,len(subpath)):
-                a.append(['C',subpath[i-1][2][:] + subpath[i][0][:] + subpath[i][1][:]])
-    return a
 
 def parsePath(d):
     return CubicSuperPath(simplepath.parsePath(d))
-
-def formatPath(p):
-    return simplepath.formatPath(unCubicSuperPath(p))
-
-
-# vim: expandtab shiftwidth=4 tabstop=8 softtabstop=4 fileencoding=utf-8 textwidth=99

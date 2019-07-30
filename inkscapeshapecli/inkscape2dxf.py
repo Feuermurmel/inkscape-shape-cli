@@ -63,7 +63,7 @@ def main(in_path, out_path, flatness):
         regularize_svg_document(temp_svg_path)
 
         export_effect = dxfexport.DXFExportEffect(layers, flatness)
-        export_effect.affect(args=[temp_svg_path], output=False)
+        export_effect.affect(temp_svg_path)
 
     export_effect.write_dxf(out_path)
 
